@@ -268,6 +268,11 @@ explore: sales_flat_order {
     sql_on: ${sales_flat_order.customer_group_id} = ${customer_group.customer_group_id} ;;
     relationship: many_to_one
   }
+  join: customer_entity {
+    type: left_outer
+    sql_on: ${sales_flat_order.customer_id} = ${customer_entity.entity_id} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: sales_flat_order_address {}
