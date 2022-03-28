@@ -80,6 +80,31 @@ view: customer_entity {
     sql: ${TABLE}.website_id ;;
   }
 
+  dimension: customer_verify {
+    type: number
+    sql: ${TABLE}.customer_verify ;;
+  }
+
+  dimension: customer_verify_code {
+    case: {
+      when: {
+        sql: ${TABLE}.customer_verify=1 ;;
+        label: "老用户未验证"
+      }
+      when: {
+        sql: ${TABLE}.customer_verify=2 ;;
+        label: "新用户未验证"
+      }
+      when: {
+        sql: ${TABLE}.customer_verify=3 ;;
+        label: "新用户验证通过"
+      }
+      else: "其他"
+    }
+    type: string
+    sql: ${TABLE}.customer_verify ;;
+  }
+
   measure: count {
     type: count
     drill_fields: []
