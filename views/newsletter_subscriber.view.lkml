@@ -16,6 +16,20 @@ view: newsletter_subscriber {
     sql: ${TABLE}.change_status_at ;;
   }
 
+  dimension_group: subscriber_created_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: cast(subscriber_created_at as timestamp) ;;
+  }
+
   dimension: customer_id {
     type: number
     sql: ${TABLE}.customer_id ;;
