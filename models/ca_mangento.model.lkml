@@ -30,7 +30,21 @@ explore: catalog_category_product_index {}
 
 explore: catalog_eav_attribute {}
 
-explore: catalog_product_entity {}
+explore: catalog_product_entity {
+  join: catalog_product_entity_int {
+    relationship: one_to_one
+    sql_on: ${catalog_product_entity.entity_id} = ${catalog_product_entity_int.entity_id} ;;
+  }
+  join: catalog_product_entity_int_1 {
+    from: catalog_product_entity_int
+    relationship: one_to_one
+    sql_on: ${catalog_product_entity.entity_id} = ${catalog_product_entity_int_1.entity_id} ;;
+  }
+  join: cataloginventory_stock_item{
+    relationship: one_to_one
+    sql_on: ${catalog_product_entity.entity_id} = ${cataloginventory_stock_item.product_id} ;;
+  }
+}
 
 explore: catalog_product_entity_datetime {}
 
