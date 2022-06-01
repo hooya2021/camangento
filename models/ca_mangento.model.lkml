@@ -126,7 +126,12 @@ explore: customer_address_entity_varchar {}
 
 explore: customer_eav_attribute {}
 
-explore: customer_entity {}
+explore: customer_entity {
+  join: customer_register_source {
+    sql_on: ${customer_entity.entity_id} = ${customer_register_source.customer_id} ;;
+    relationship: one_to_one
+  }
+}
 
 explore: customer_entity_datetime {}
 
