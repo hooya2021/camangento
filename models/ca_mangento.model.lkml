@@ -131,6 +131,24 @@ explore: customer_entity {
     sql_on: ${customer_entity.entity_id} = ${customer_register_source.customer_id} ;;
     relationship: one_to_one
   }
+  join:customer_entity_varchar {
+    sql_on: ${customer_entity.entity_id} = ${customer_entity_varchar.entity_id};;
+    sql_where: ${customer_entity_varchar.attribute_id}=5 ;;
+    relationship: one_to_one
+
+  }
+  join:customer_entity_varchar_1 {
+    from: customer_entity_varchar
+    sql_on: ${customer_entity.entity_id} = ${customer_entity_varchar.entity_id};;
+    sql_where: ${customer_entity_varchar.attribute_id}=7 ;;
+    relationship: one_to_one
+
+  }
+  join:customer_address_entity_varchar{
+    sql_on: ${customer_entity.entity_id} = ${customer_address_entity_varchar.entity_id} ;;
+    sql_where:${customer_address_entity_varchar.attribute_id} =31  ;;
+    relationship: one_to_one
+  }
 }
 
 explore: customer_entity_datetime {}
@@ -295,6 +313,14 @@ explore: sales_flat_order {
   join: sales_flat_order_item {
     relationship: one_to_many
     sql_on: ${sales_flat_order.entity_id} = ${sales_flat_order_item.order_id} ;;
+  }
+  join: sales_flat_order_address {
+    relationship: one_to_one
+    sql_on: ${sales_flat_order.shipping_address_id} = ${sales_flat_order_address.entity_id} ;;
+  }
+  join: sales_flat_order_source {
+    relationship: one_to_one
+    sql_on: ${sales_flat_order.entity_id} = ${sales_flat_order_source.order_id} ;;
   }
 }
 
