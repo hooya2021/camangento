@@ -322,6 +322,10 @@ explore: sales_flat_order {
     relationship: one_to_one
     sql_on: ${sales_flat_order.entity_id} = ${sales_flat_order_source.order_id} ;;
   }
+  join: sales_flat_order_payment {
+    relationship: one_to_one
+    sql_on: ${sales_flat_order.entity_id} = ${sales_flat_order_payment.parent_id} ;;
+  }
 }
 
 explore: sales_flat_order_address {}
@@ -477,3 +481,5 @@ explore: wishlist_item_stock_alert {
 explore: zeon_landingpage {}
 
 explore: zeon_landingpage_store {}
+
+explore: customer_retention_analysis {}

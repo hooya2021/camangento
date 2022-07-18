@@ -248,6 +248,7 @@ view: sales_flat_order {
     timeframes: [
       raw,
       time,
+      hour_of_day,
       date,
       week,
       month,
