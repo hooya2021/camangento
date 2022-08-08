@@ -301,12 +301,10 @@ explore: sales_flat_invoice_item {}
 
 explore: sales_flat_order {
   join: customer_group {
-    type: left_outer
     sql_on: ${sales_flat_order.customer_group_id} = ${customer_group.customer_group_id} ;;
-    relationship: many_to_one
+    relationship: one_to_one
   }
   join: customer_entity {
-    type: left_outer
     sql_on: ${sales_flat_order.customer_id} = ${customer_entity.entity_id} ;;
     relationship: one_to_one
   }
@@ -325,6 +323,15 @@ explore: sales_flat_order {
   join: sales_flat_order_payment {
     relationship: one_to_one
     sql_on: ${sales_flat_order.entity_id} = ${sales_flat_order_payment.parent_id} ;;
+  }
+
+  join: salesrule_coupon {
+    relationship: one_to_one
+    sql_on: upper(${sales_flat_order.coupon_code}) = upper(${salesrule_coupon.code} );;
+  }
+  join: salesrule {
+    relationship: one_to_one
+    sql_on: ${salesrule_coupon.rule_id}= ${salesrule.rule_id};;
   }
 }
 
